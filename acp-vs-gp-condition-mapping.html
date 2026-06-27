@@ -229,6 +229,54 @@
   .src-side-h.med{color:var(--med-ink)} .src-side-h.med .tick{background:var(--med-bd)}
   .src-side-h.acp{color:var(--acp-ink)} .src-side-h.acp .tick{background:var(--acp-bd)}
   .src-note{font-size:11.5px;color:var(--ink3);font-style:italic;margin-top:.2rem}
+
+  /* swipe hint — shown on mobile only */
+  .scroll-hint{display:none;align-items:center;gap:.45rem;font-size:12px;color:var(--accent);
+    font-family:var(--mono);letter-spacing:.03em;font-weight:500;margin:0 0 .6rem}
+  .scroll-hint svg{flex:none}
+
+  /* ===== mobile optimisation ===== */
+  @media(max-width:720px){
+    body{font-size:14.5px}
+    .wrap{padding:0 1rem}
+    .head-inner{padding:1.5rem 1.1rem 1.2rem}
+    h1{font-size:23px;padding-right:5rem}
+    h1 .q{font-size:16px}
+    .standfirst{font-size:14.5px}
+    .byline{display:block;line-height:1.5}
+    .byline svg{display:inline;vertical-align:-2px;margin-right:.15rem}
+    .byline{font-size:12.5px}
+    .theme-toggle{top:1rem;right:1rem;padding:.3rem .55rem;font-size:11.5px}
+    .boundary{font-size:12.5px;padding:.75rem .85rem;margin-top:1.1rem}
+
+    .pw{padding:.9rem 1rem}
+    .standalone-note{padding:.85rem 1rem;font-size:12.5px}
+
+    /* domain selectors stack full-width instead of overflowing */
+    .domain-bar{flex-direction:column;align-items:stretch;gap:.9rem;padding:1rem 1.05rem;margin:1.6rem 0 1rem}
+    .domain-bar .ctl{width:100%}
+    select,select#domain,select#sort{width:100%;min-width:0}
+    .domain-status{margin-left:0}
+
+    .legend-row{gap:1rem 1.3rem}
+
+    /* matrix → horizontal scroll with a frozen condition column */
+    .scroll-hint{display:flex}
+    .matrix-shell{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    table{min-width:600px}
+    thead tr.band th.spacer,
+    thead tr.cols th.cond-h,
+    td.cond{position:sticky;left:0;background:var(--surface);box-shadow:1px 0 0 var(--line2)}
+    thead tr.band th.spacer{z-index:3}
+    td.cond{z-index:3}
+    thead tr.cols th.cond-h{z-index:4;padding-left:.85rem}
+    td.cond{padding-left:.85rem}
+  }
+  @media(max-width:420px){
+    h1{font-size:21px;padding-right:4.4rem}
+    .head-inner{padding:1.3rem 1rem 1rem}
+    table{min-width:540px}
+  }
 </style>
 </head>
 <body>
@@ -347,6 +395,11 @@
   <p class="clickhint">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11.5 9 4.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 11V9.5a1.5 1.5 0 0 1 3 0V11"/><path d="M15 11.5V10a1.5 1.5 0 0 1 3 0v5a6 6 0 0 1-6 6h-2a6 6 0 0 1-5-2.7L3.5 16a1.5 1.5 0 0 1 2.5-1.6L7.5 16"/></svg>
     Click any coloured cell to see the source text and the reasoning behind its score.
+  </p>
+
+  <p class="scroll-hint" aria-hidden="true">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7 4 11l4 4"/><path d="M16 7l4 4-4 4"/><path d="M4 11h16"/></svg>
+    Swipe the table sideways to see all five curricula
   </p>
 
   <div class="matrix-shell">
